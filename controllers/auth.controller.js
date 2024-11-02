@@ -63,9 +63,12 @@ export const google = async (req, res, next) => {
             process.env.JWT_SECRET
         );
         const {password, ...rest} = user._doc;
+        console.log("user",user);
         res.status(200).cookie('access_token', token, {
-            httpOnly: true
-        })
+            httpOnly: true,
+            sameSite: 'None',
+            domain: 'blog-admin-panel-frontend-nvc9.onrender.com',
+        }).json({ success: true, message: "User authenticated", user: rest });
     }
     else{
         const generatedPassword = Math.random().toString(36).slice(-8) +
