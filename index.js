@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.route.js";
 import postRoutes from "./routes/post.route.js";
 import commentRoutes from './routes/comment.route.js';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -24,6 +25,10 @@ const app = express();
 
 app.use(express.json())
 app.use(cookieParser());
+app.use(cors({
+    origin: 'https://blog-admin-panel-frontend-nvc9.onrender.com',
+    credentials: true  // Allow credentials (cookies) to be sent with requests
+}));
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

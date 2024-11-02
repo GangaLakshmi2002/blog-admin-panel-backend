@@ -67,6 +67,7 @@ export const google = async (req, res, next) => {
         res.status(200).cookie('access_token', token, {
             httpOnly: true,
             sameSite: 'None',
+            domain: "blog-admin-panel-backend.onrender.com"
             // domain: 'blog-admin-panel-frontend-nvc9.onrender.com',
         }).json({ success: true, message: "User authenticated", user: rest });
     }
