@@ -23,15 +23,24 @@ mongoose
 const __dirname = path.resolve();
 const app = express();
 
-app.use(express.json())
-app.use(cookieParser());
 app.use(cors({
-    origin: 'https://blog-admin-panel-frontend-nvc9.onrender.com',
+    origin: process.env.API_URL,
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "Cache-Control",
+        "Expires",
+        "Pragma",
+      ],
     credentials: true  // Allow credentials (cookies) to be sent with requests
 }));
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+app.use(cookieParser());
+app.use(express.json())
+
+app.listen(5000, () => {
+    console.log('Server is running on port 5000');
 });
 
 app.use('/api/auth', authRoutes);

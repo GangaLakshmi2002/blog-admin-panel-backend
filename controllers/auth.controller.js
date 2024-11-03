@@ -44,7 +44,8 @@ export const signin = async (req, res, next) => {
         );
         const {password: pass, ...rest} = validUser._doc;
         res.status(200).cookie('access_token', token, {
-            httpOnly: true
+            httpOnly: true,
+            // secure: false,
         }).json(rest);
     } catch (error) {
         next(error)
@@ -66,8 +67,8 @@ export const google = async (req, res, next) => {
         console.log("user",user);
         res.status(200).cookie('access_token', token, {
             httpOnly: true,
-            sameSite: 'None',
-            domain: "blog-admin-panel-backend.onrender.com"
+            secure: false,
+            // domain: "blog-admin-panel-backend.onrender.com"
             // domain: 'blog-admin-panel-frontend-nvc9.onrender.com',
         }).json({ success: true, message: "User authenticated", user: rest });
     }
